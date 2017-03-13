@@ -16,6 +16,11 @@ def hello():
   s = words[w1].strip() + " " + words[w2].strip() + " " + words[w3].strip()
   return json.dumps({'words': s})
 
+@app.route("/audio", methods=["POST"])
+def audio():
+  
+  return "hello"
+
 
 if __name__ == "__main__":
   app.run()
