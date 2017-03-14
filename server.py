@@ -32,7 +32,7 @@ def audio():
       cleaned_audio.append(int(astr, 16))
   rs = []
 
-  sampling_rate = cleaned_audio / 16 - 1
+  sampling_rate = len(cleaned_audio) / 16 - 1
   bit_counter = 0
   index = 0
 
@@ -50,7 +50,9 @@ def audio():
       random_bitstring += str(bit_counter)
     index += 1
 
-  print len(random_bitstring)
+  if len(random_bitstring) == 0:
+    return '0'
+
   return str(int(random_bitstring, 2))
 
 '''
