@@ -45,8 +45,10 @@ def audio():
       x ^= b[i+1]
 
     bit_counter ^= x
-    random_bitstring += str(bit_counter)
-    index += samping_rate
+
+    if (index % sampling_rate) == 0:
+      random_bitstring += str(bit_counter)
+    index += 1
 
   print len(random_bitstring)
   return str(int(random_bitstring, 2))
