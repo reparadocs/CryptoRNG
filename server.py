@@ -12,7 +12,7 @@ f.close()
 SAMPLING_RATE = 16
 
 def bitlist(num):
-  return [int(digit) for digit in bin(n)[2:]]
+  return [int(digit) for digit in bin(num)[2:]]
 
 @app.route("/words")
 def hello():
@@ -32,9 +32,9 @@ def audio():
       cleaned_audio.append(int(astr, 16))
   rs = []
 
-  sampling_rate = len(cleaned_audio) / 16 - 1
+  sampling_rate = len(cleaned_audio) / (16 + 1)
   bit_counter = 0
-  index = 0
+  index = sampling_rate
 
   random_bitstring = ''
 
