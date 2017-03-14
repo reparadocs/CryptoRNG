@@ -9,6 +9,11 @@ f = open("words.txt", "r")
 words = f.readlines()
 f.close()
 
+SAMPLING_RATE = 16
+
+def bitlist(num):
+  return [int(digit) for digit in bin(n)[2:]]
+
 @app.route("/words")
 def hello():
   w1 = random.randrange(len(words))
@@ -27,6 +32,26 @@ def audio():
       cleaned_audio.append(int(astr, 16))
   rs = []
 
+  sampling_rate = cleaned_audio / 16 - 1
+  bit_counter = 0
+  index = 0
+
+  random_bitstring = ''
+
+  while index < len(cleaned_audio) and len(random_bitstring) < 16:
+    b = bitlist(cleaned_audio[index])
+    x = b[0]
+    for i in range(len(b) - 1):
+      x ^= b[i+1]
+
+    bit_counter ^= x
+    random_bitstring += str(bit_counter)
+    index += samping_rate
+
+  print len(random_bitstring)
+  return str(int(random_bitstring, 2))
+
+'''
   for i in range(16):
     ind1 = random.randrange(len(cleaned_audio) - 1)
     random.seed(cleaned_audio[ind1])
@@ -40,6 +65,7 @@ def audio():
     rs.append(r1)
 
   return str(random.choice(rs) ^ random.getrandbits(16)) 
+  '''
 
 
 if __name__ == "__main__":
